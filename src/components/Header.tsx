@@ -3,8 +3,13 @@ import { motion } from 'framer-motion';
 import { 
   Sun, 
   Moon, 
-  BookOpen, 
-  User, 
+  User,
+  Briefcase,
+  Code,
+  GraduationCap,
+  Award,
+  BookOpen,
+  Users,
   Settings, 
   HelpCircle, 
   Menu,
@@ -14,8 +19,6 @@ import { Button } from './ui/button';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface HeaderProps {
-  mode: 'demo' | 'portfolio';
-  onModeChange: (mode: 'demo' | 'portfolio') => void;
   onSettingsClick: () => void;
   onHelpClick: () => void;
   currentPage: number;
@@ -26,8 +29,6 @@ interface HeaderProps {
 }
 
 export function Header({
-  mode,
-  onModeChange,
   onSettingsClick,
   onHelpClick,
   currentPage,
@@ -39,9 +40,15 @@ export function Header({
   const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navigationItems = [
-    { id: 'demo', label: 'Demo Book', icon: BookOpen, description: 'Interactive book experience' },
-    { id: 'portfolio', label: 'Portfolio', icon: User, description: 'Professional showcase' },
+  // Portfolio category navigation
+  const portfolioCategories = [
+    { id: 'personal', label: 'About', icon: User, description: 'Personal profile & philosophy' },
+    { id: 'professional', label: 'Experience', icon: Briefcase, description: 'Work experience & projects' },
+    { id: 'technical', label: 'Skills', icon: Code, description: 'Technical expertise' },
+    { id: 'academic', label: 'Education', icon: GraduationCap, description: 'Academic background' },
+    { id: 'achievements', label: 'Awards', icon: Award, description: 'Achievements & recognition' },
+    { id: 'content', label: 'Blog', icon: BookOpen, description: 'Blog posts & writing' },
+    { id: 'community', label: 'Community', icon: Users, description: 'Community involvement' },
   ];
 
   return (
@@ -71,33 +78,40 @@ export function Header({
 
           {/* Desktop Navigation */}
           <div className="hidden items-center space-x-1 md:flex">
-            {navigationItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = mode === item.id;
-              
-              return (
-                <Button
-                  key={item.id}
-                  onClick={() => onModeChange(item.id as 'demo' | 'portfolio')}
-                  variant={isActive ? "default" : "ghost"}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
-                    isActive
-                      ? 'text-white bg-amber-600 shadow-md'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span className="font-medium">{item.label}</span>
-                </Button>
-              );
-            })}
+            {/* Quick Category Navigation */}
+            <div className="flex items-center space-x-1">
+              {portfolioCategories.slice(0, 4).map((category) => {
+                const Icon = category.icon;
+                const relatedPages = sections?.filter(s => 
+                  s.title.toLowerCase().includes(category.label.toLowerCase()) ||
+                  (category.id === 'personal' && (s.title.includes('About') || s.title.includes('Portfolio'))) ||
+                  (category.id === 'professional' && (s.title.includes('Experience') || s.title.includes('Projects'))) ||
+                  (category.id === 'technical' && s.title.includes('Skills')) ||
+                  (category.id === 'academic' && (s.title.includes('Education') || s.title.includes('Research')))
+                ) || [];
+                
+                return (
+                  <Button
+                    key={category.id}
+                    onClick={() => relatedPages.length > 0 && onJumpToPage && onJumpToPage(relatedPages[0].index)}
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center space-x-1 px-3 py-2 rounded-lg transition-all duration-200 text-gray-700 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-gray-700"
+                    title={category.description}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span className="font-medium text-xs">{category.label}</span>
+                  </Button>
+                );
+              })}
+            </div>
 
-            {/* Sections Picker (Portfolio) */}
-            {mode === 'portfolio' && sections && sections.length > 0 && onJumpToPage && (
-              <div className="ml-2">
+            {/* Sections Picker */}
+            {sections && sections.length > 0 && onJumpToPage && (
+              <div className="ml-4">
                 <select
                   aria-label="Jump to section"
-                  className="px-2 py-2 text-sm text-gray-700 bg-white rounded-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
+                  className="px-3 py-2 text-sm text-gray-700 bg-white rounded-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   value={currentPage}
                   onChange={(e) => onJumpToPage(Number(e.target.value))}
                 >
@@ -192,41 +206,51 @@ export function Header({
         >
           <div className="py-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
             {/* Mobile Navigation */}
-            <div className="space-y-1">
-              {navigationItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = mode === item.id;
-                
-                return (
-                  <Button
-                    key={item.id}
-                    onClick={() => {
-                      onModeChange(item.id as 'demo' | 'portfolio');
-                      setIsMobileMenuOpen(false);
-                    }}
-                    variant={isActive ? "default" : "ghost"}
-                    className={`w-full justify-start space-x-3 px-4 py-3 rounded-lg ${
-                      isActive
-                        ? 'text-white bg-amber-600'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                    }`}
-                  >
-                    <Icon className="w-5 h-5" />
-                    <div className="text-left">
-                      <div className="font-medium">{item.label}</div>
-                      <div className="text-xs opacity-75">{item.description}</div>
-                    </div>
-                  </Button>
-                );
-              })}
+            <div className="space-y-2">
+              {/* Mobile Category Navigation */}
+              <div className="grid grid-cols-2 gap-2">
+                {portfolioCategories.map((category) => {
+                  const Icon = category.icon;
+                  const relatedPages = sections?.filter(s => 
+                    s.title.toLowerCase().includes(category.label.toLowerCase()) ||
+                    (category.id === 'personal' && (s.title.includes('About') || s.title.includes('Portfolio'))) ||
+                    (category.id === 'professional' && (s.title.includes('Experience') || s.title.includes('Projects'))) ||
+                    (category.id === 'technical' && s.title.includes('Skills')) ||
+                    (category.id === 'academic' && (s.title.includes('Education') || s.title.includes('Research'))) ||
+                    (category.id === 'achievements' && (s.title.includes('Awards') || s.title.includes('Achievements'))) ||
+                    (category.id === 'content' && s.title.includes('Blog')) ||
+                    (category.id === 'community' && s.title.includes('Community'))
+                  ) || [];
+                  
+                  return (
+                    <Button
+                      key={category.id}
+                      onClick={() => {
+                        if (relatedPages.length > 0 && onJumpToPage) {
+                          onJumpToPage(relatedPages[0].index);
+                          setIsMobileMenuOpen(false);
+                        }
+                      }}
+                      variant="ghost"
+                      className="flex items-center space-x-2 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-gray-700"
+                    >
+                      <Icon className="w-4 h-4" />
+                      <div className="text-left">
+                        <div className="font-medium text-sm">{category.label}</div>
+                        <div className="text-xs opacity-75">{category.description}</div>
+                      </div>
+                    </Button>
+                  );
+                })}
+              </div>
 
-              {/* Mobile Sections Picker (Portfolio) */}
-              {mode === 'portfolio' && sections && sections.length > 0 && onJumpToPage && (
-                <div className="px-2">
-                  <label className="block mb-1 text-xs text-gray-600 dark:text-gray-300">Portfolio Sections</label>
+              {/* Mobile Sections Picker */}
+              {sections && sections.length > 0 && onJumpToPage && (
+                <div className="px-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <label className="block mb-2 text-xs font-medium text-gray-600 dark:text-gray-300">All Portfolio Sections</label>
                   <select
                     aria-label="Jump to section"
-                    className="px-2 py-2 w-full text-sm text-gray-700 bg-white rounded-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
+                    className="px-3 py-2 w-full text-sm text-gray-700 bg-white rounded-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     value={currentPage}
                     onChange={(e) => {
                       onJumpToPage(Number(e.target.value));
