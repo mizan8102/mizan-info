@@ -337,7 +337,7 @@ export const portfolioPages: BookPage[] = [
   },
   {
     id: 'blog-js-es6-refresher',
-    title: 'Blog: JS ES6+ Refresher (EN + বাংলা)',
+    title: 'Blog: Advanced JavaScript ES6+ Mastery Guide',
     content: `
       <h1>JavaScript (ES6+) Refresher: Q&A + Examples</h1>
       <p><strong>Goal:</strong> দ্রুত ইন্টারভিউ রিভিশন (English + বাংলা ব্যাখ্যা + উদাহরণ)</p>
@@ -908,6 +908,635 @@ const sw = createStopwatch();
       </p>
     `,
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center'
+  },
+  {
+    id: 'blog-js-mastery-professional',
+    title: 'Blog: JavaScript ES6+ Professional Mastery Guide',
+    content: `
+      <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+        <h1 style="color: white; margin-bottom: 1rem;">🚀 JavaScript ES6+ Professional Mastery Guide</h1>
+        <p style="color: rgba(255,255,255,0.9);"><strong>Complete Interview Preparation + Tutorial + Practice Projects</strong></p>
+        <p style="color: rgba(255,255,255,0.8);">Comprehensive bilingual guide for mastering modern JavaScript concepts</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+          <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+            <strong>🎯 English:</strong> Professional explanations, interview questions, real-world examples
+          </div>
+          <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+            <strong>🇧🇩 বাংলা:</strong> সহজ ব্যাখ্যা, প্র্যাকটিক্যাল উদাহরণ, ইন্টারভিউ টিপস
+          </div>
+        </div>
+      </div>
+
+      <!-- Table of Contents -->
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+        <h3>📚 Table of Contents</h3>
+        <ol style="columns: 2; column-gap: 2rem;">
+          <li><a href="#promises">Promises & Async Programming</a></li>
+          <li><a href="#async-await">Async/Await Mastery</a></li>
+          <li><a href="#closures">Closures & Scope</a></li>
+          <li><a href="#error-handling">Error Handling Strategies</a></li>
+          <li><a href="#advanced-patterns">Advanced Patterns</a></li>
+          <li><a href="#real-world-projects">Real-World Projects</a></li>
+        </ol>
+      </div>
+
+      <!-- Section 1: Promises -->
+      <div id="promises" style="margin-bottom: 3rem;">
+        <h2 style="background: linear-gradient(45deg, #FF6B6B, #4ECDC4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">🔮 1. Promises & Asynchronous Programming</h2>
+        
+        <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2196f3; margin: 1rem 0;">
+          <h3>🤔 Why Do We Need Promises?</h3>
+          <p><strong>English:</strong> JavaScript is single-threaded, but we need to handle time-consuming operations (API calls, file operations, timers) without blocking the main thread. Promises solve the "callback hell" problem and provide better error handling.</p>
+          <p><strong>বাংলা:</strong> জাভাস্ক্রিপ্ট একটি single-threaded ভাষা, কিন্তু আমাদের সময়সাপেক্ষ কাজগুলো (API কল, ফাইল অপারেশন) করতে হয় main thread ব্লক না করে। Promise "callback hell" সমস্যার সমাধান করে।</p>
+        </div>
+
+        <h3>📋 Interview Questions & Answers</h3>
+        
+        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+          <h4>Q1: What is a Promise and what are its states?</h4>
+          <p><strong>Answer:</strong></p>
+          <ul>
+            <li><strong>English:</strong> A Promise is an object representing the eventual completion or failure of an asynchronous operation. It has three states: Pending (initial), Fulfilled (resolved), Rejected (failed).</li>
+            <li><strong>বাংলা:</strong> Promise হলো একটি object যা asynchronous কাজের ভবিষ্যতের ফলাফল প্রতিনিধিত্ব করে। এর তিনটি অবস্থা: Pending (শুরুর অবস্থা), Fulfilled (সফল), Rejected (ব্যর্থ)।</li>
+          </ul>
+        </div>
+
+        <pre><code class="language-js">// Basic Promise Creation and Usage
+const fetchUserData = new Promise((resolve, reject) => {
+  const success = Math.random() > 0.5;
+  
+  setTimeout(() => {
+    if (success) {
+      resolve({
+        id: 1,
+        name: 'John Doe',
+        email: 'john@example.com'
+      });
+    } else {
+      reject(new Error('Failed to fetch user data'));
+    }
+  }, 2000);
+});
+
+// Using the Promise
+fetchUserData
+  .then(user => {
+    console.log('✅ User fetched:', user);
+    return user.id; // Return for chaining
+  })
+  .then(userId => {
+    console.log('👤 Processing user ID:', userId);
+  })
+  .catch(error => {
+    console.error('❌ Error:', error.message);
+  })
+  .finally(() => {
+    console.log('🏁 Cleanup operations');
+  });
+</code></pre>
+
+        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+          <h4>Q2: Explain Promise.all(), Promise.race(), Promise.allSettled(), and Promise.any()</h4>
+          <p><strong>English:</strong> These are utility methods for handling multiple promises with different behaviors.</p>
+          <p><strong>বাংলা:</strong> এগুলো একাধিক promise একসাথে handle করার জন্য বিভিন্ন utility method।</p>
+        </div>
+
+        <pre><code class="language-js">// Promise Utility Methods Comparison
+const fastAPI = () => Promise.resolve('Fast API Response');
+const slowAPI = () => new Promise(resolve => setTimeout(() => resolve('Slow API Response'), 3000));
+const failingAPI = () => Promise.reject(new Error('API Failed'));
+
+// 1. Promise.all() - Wait for all, fail if any fails
+// সব Promise সফল হলেই result, একটা fail হলেই error
+Promise.all([fastAPI(), slowAPI()])
+  .then(results => console.log('All succeeded:', results))
+  .catch(error => console.log('One failed:', error));
+
+// 2. Promise.race() - First to settle (resolve or reject)
+// যেটা আগে complete হবে সেটার result
+Promise.race([fastAPI(), slowAPI()])
+  .then(result => console.log('First to finish:', result));
+
+// 3. Promise.allSettled() - Wait for all, get all results
+// সব Promise complete হওয়ার জন্য অপেক্ষা, সব result পাবো
+Promise.allSettled([fastAPI(), failingAPI()])
+  .then(results => {
+    results.forEach((result, index) => {
+      if (result.status === 'fulfilled') {
+        console.log(\`Promise \${index} succeeded:\`, result.value);
+      } else {
+        console.log(\`Promise \${index} failed:\`, result.reason);
+      }
+    });
+  });
+</code></pre>
+
+        <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffc107; margin: 1rem 0;">
+          <h4>💡 Pro Tips</h4>
+          <ul>
+            <li><strong>English:</strong> Always handle errors with .catch() or try/catch. Use Promise.allSettled() when you need results from all promises regardless of failures.</li>
+            <li><strong>বাংলা:</strong> সবসময় .catch() বা try/catch দিয়ে error handle করুন। সব promise এর result চাইলে Promise.allSettled() ব্যবহার করুন।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section 2: Async/Await -->
+      <div id="async-await" style="margin-bottom: 3rem;">
+        <h2 style="background: linear-gradient(45deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">⚡ 2. Async/Await Mastery</h2>
+        
+        <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4caf50; margin: 1rem 0;">
+          <h3>🤔 Why Use Async/Await?</h3>
+          <p><strong>English:</strong> Async/await makes asynchronous code look and behave like synchronous code, eliminating callback hell and making error handling more intuitive with try/catch blocks.</p>
+          <p><strong>বাংলা:</strong> Async/await asynchronous code কে synchronous code এর মতো দেখতে ও কাজ করতে সাহায্য করে। এটি callback hell দূর করে এবং error handling সহজ করে।</p>
+        </div>
+
+        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+          <h4>Q3: How does async/await work internally?</h4>
+          <p><strong>Answer:</strong></p>
+          <ul>
+            <li><strong>English:</strong> Async functions always return a Promise. The await keyword pauses function execution until the Promise resolves, then returns the resolved value.</li>
+            <li><strong>বাংলা:</strong> Async function সবসময় Promise return করে। await keyword function execution থামিয়ে রাখে Promise resolve না হওয়া পর্যন্ত।</li>
+          </ul>
+        </div>
+
+        <pre><code class="language-js">// Comparison: Promise chains vs Async/Await
+// Traditional Promise Chain (Callback Hell Alternative)
+function fetchUserProfile() {
+  return fetch('/api/user/1')
+    .then(response => response.json())
+    .then(user => {
+      return fetch(\`/api/user/\${user.id}/posts\`);
+    })
+    .then(response => response.json())
+    .then(posts => {
+      return fetch(\`/api/user/\${posts[0].authorId}/profile\`);
+    })
+    .then(response => response.json())
+    .catch(error => {
+      console.error('Chain error:', error);
+      throw error;
+    });
+}
+
+// Modern Async/Await Approach
+async function fetchUserProfileAsync() {
+  try {
+    // Sequential execution (one after another)
+    const userResponse = await fetch('/api/user/1');
+    const user = await userResponse.json();
+    
+    const postsResponse = await fetch(\`/api/user/\${user.id}/posts\`);
+    const posts = await postsResponse.json();
+    
+    const profileResponse = await fetch(\`/api/user/\${posts[0].authorId}/profile\`);
+    const profile = await profileResponse.json();
+    
+    return profile;
+  } catch (error) {
+    console.error('Async error:', error);
+    throw error; // Re-throw for caller to handle
+  }
+}
+
+// Parallel execution for independent operations
+async function fetchMultipleDataParallel() {
+  try {
+    // All requests start simultaneously
+    const [userResponse, postsResponse, settingsResponse] = await Promise.all([
+      fetch('/api/user/1'),
+      fetch('/api/posts'),
+      fetch('/api/settings')
+    ]);
+    
+    // Parse responses in parallel
+    const [user, posts, settings] = await Promise.all([
+      userResponse.json(),
+      postsResponse.json(),
+      settingsResponse.json()
+    ]);
+    
+    return { user, posts, settings };
+  } catch (error) {
+    console.error('Parallel fetch error:', error);
+    throw error;
+  }
+}
+</code></pre>
+
+        <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffc107; margin: 1rem 0;">
+          <h4>💡 Advanced Async/Await Patterns</h4>
+          <ul>
+            <li><strong>English:</strong> Use Promise.all() for parallel operations, async/await for sequential operations that depend on each other.</li>
+            <li><strong>বাংলা:</strong> Parallel operations এর জন্য Promise.all(), sequential dependent operations এর জন্য async/await ব্যবহার করুন।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section 3: Closures -->
+      <div id="closures" style="margin-bottom: 3rem;">
+        <h2 style="background: linear-gradient(45deg, #ff9a9e, #fecfef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">🔒 3. Closures & Lexical Scope</h2>
+        
+        <div style="background: #fce4ec; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #e91e63; margin: 1rem 0;">
+          <h3>🤔 Why Are Closures Important?</h3>
+          <p><strong>English:</strong> Closures enable data privacy, function factories, callbacks, and are fundamental to many JavaScript patterns including modules, currying, and event handlers.</p>
+          <p><strong>বাংলা:</strong> Closure data privacy, function factory, callback এবং JavaScript এর অনেক pattern (module, currying, event handler) এর ভিত্তি।</p>
+        </div>
+
+        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+          <h4>Q5: What is a closure and how does it work?</h4>
+          <p><strong>Answer:</strong></p>
+          <ul>
+            <li><strong>English:</strong> A closure is a function that has access to variables from its outer (enclosing) scope even after the outer function has returned. It "closes over" these variables.</li>
+            <li><strong>বাংলা:</strong> Closure হলো এমন function যা তার outer scope এর variable গুলো access করতে পারে outer function return হওয়ার পরেও।</li>
+          </ul>
+        </div>
+
+        <pre><code class="language-js">// Understanding Closures with Practical Examples
+// Example 1: Basic Closure - Counter Function
+function createCounter(initialValue = 0) {
+  let count = initialValue; // Private variable
+  
+  // Return object with methods that have access to 'count'
+  return {
+    increment() {
+      count++;
+      return count;
+    },
+    decrement() {
+      count--;
+      return count;
+    },
+    getValue() {
+      return count;
+    },
+    reset() {
+      count = initialValue;
+      return count;
+    }
+  };
+}
+
+const counter1 = createCounter(10);
+const counter2 = createCounter(100);
+
+console.log(counter1.increment()); // 11
+console.log(counter1.increment()); // 12
+console.log(counter2.increment()); // 101
+
+// Each counter maintains its own 'count' variable
+console.log(counter1.getValue()); // 12
+console.log(counter2.getValue()); // 101
+
+// Example 2: Function Factory with Closures
+function createMultiplier(multiplier) {
+  return function(number) {
+    return number * multiplier; // 'multiplier' is captured in closure
+  };
+}
+
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+const tenTimes = createMultiplier(10);
+
+console.log(double(5)); // 10
+console.log(triple(5)); // 15
+console.log(tenTimes(5)); // 50
+</code></pre>
+
+        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+          <h4>Q6: Common Closure Pitfalls - Loop with setTimeout</h4>
+          <p><strong>Problem & Solution:</strong></p>
+        </div>
+
+        <pre><code class="language-js">// Common Closure Problem in Loops
+console.log('=== Problem: Loop with setTimeout ===');
+
+// ❌ PROBLEM: All timeouts will log "3"
+for (var i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log('Problem:', i); // Will log 3, 3, 3
+  }, 1000);
+}
+
+// ✅ SOLUTION 1: Use let instead of var (Block Scope)
+for (let i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log('Solution 1 (let):', i); // Will log 0, 1, 2
+  }, 1500);
+}
+
+// ✅ SOLUTION 2: Use IIFE (Immediately Invoked Function Expression)
+for (var i = 0; i < 3; i++) {
+  (function(index) {
+    setTimeout(function() {
+      console.log('Solution 2 (IIFE):', index); // Will log 0, 1, 2
+    }, 2000);
+  })(i);
+}
+</code></pre>
+      </div>
+
+      <!-- Section 4: Error Handling -->
+      <div id="error-handling" style="margin-bottom: 3rem;">
+        <h2 style="background: linear-gradient(45deg, #fa709a, #fee140); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">🛡️ 4. Advanced Error Handling Strategies</h2>
+        
+        <div style="background: #ffebee; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f44336; margin: 1rem 0;">
+          <h3>🤔 Why Is Error Handling Critical?</h3>
+          <p><strong>English:</strong> Proper error handling prevents application crashes, provides better user experience, enables debugging, and maintains application stability in production.</p>
+          <p><strong>বাংলা:</strong> সঠিক error handling application crash প্রতিরোধ করে, user experience ভালো রাখে, debugging সহজ করে এবং production এ stability বজায় রাখে।</p>
+        </div>
+
+        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+          <h4>Q7: Different types of errors in JavaScript and how to handle them?</h4>
+          <p><strong>Answer:</strong></p>
+          <ul>
+            <li><strong>English:</strong> Syntax errors (compile-time), Runtime errors (TypeError, ReferenceError), Logic errors, Async errors (Promise rejections).</li>
+            <li><strong>বাংলা:</strong> Syntax error (compile-time), Runtime error (TypeError, ReferenceError), Logic error, Async error (Promise rejection)।</li>
+          </ul>
+        </div>
+
+        <pre><code class="language-js">// Comprehensive Error Handling Examples
+// 1. Basic Try-Catch with Different Error Types
+function demonstrateErrorTypes() {
+  // TypeError Example
+  try {
+    null.someMethod(); // TypeError: Cannot read property 'someMethod' of null
+  } catch (error) {
+    if (error instanceof TypeError) {
+      console.error('Type Error caught:', error.message);
+    }
+  }
+  
+  // ReferenceError Example
+  try {
+    console.log(undefinedVariable); // ReferenceError: undefinedVariable is not defined
+  } catch (error) {
+    if (error instanceof ReferenceError) {
+      console.error('Reference Error caught:', error.message);
+    }
+  }
+  
+  // Custom Error Example
+  try {
+    throw new Error('Custom error message');
+  } catch (error) {
+    console.error('Custom Error caught:', error.message);
+  }
+}
+
+// 2. Async Error Handling with Retry Logic
+class APIService {
+  static async fetchWithRetry(url, maxRetries = 3, delay = 1000) {
+    let lastError;
+    
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        console.log(\`Attempt \${attempt} for \${url}\`);
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          throw new Error(\`HTTP \${response.status}: \${response.statusText}\`);
+        }
+        
+        const data = await response.json();
+        console.log(\`✅ Success on attempt \${attempt}\`);
+        return data;
+        
+      } catch (error) {
+        lastError = error;
+        console.error(\`❌ Attempt \${attempt} failed:\`, error.message);
+        
+        // Don't wait after the last attempt
+        if (attempt < maxRetries) {
+          console.log(\`⏳ Waiting \${delay}ms before retry...\`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          delay *= 2; // Exponential backoff
+        }
+      }
+    }
+    
+    throw new Error(\`All \${maxRetries} attempts failed. Last error: \${lastError.message}\`);
+  }
+}
+</code></pre>
+
+        <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffc107; margin: 1rem 0;">
+          <h4>💡 Error Handling Best Practices</h4>
+          <ul>
+            <li><strong>English:</strong> Always handle Promise rejections, use specific error types, log errors for debugging, provide fallback values, implement retry mechanisms for network calls.</li>
+            <li><strong>বাংলা:</strong> Promise rejection সবসময় handle করুন, specific error type ব্যবহার করুন, debugging এর জন্য error log করুন, fallback value দিন, network call এর জন্য retry mechanism implement করুন।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section 5: Real-World Projects -->
+      <div id="real-world-projects" style="margin-bottom: 3rem;">
+        <h2 style="background: linear-gradient(45deg, #a8edea, #fed6e3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">🚀 5. Real-World Practice Projects</h2>
+        
+        <div style="background: #e1f5fe; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #03a9f4; margin: 1rem 0;">
+          <h3>🎯 Project-Based Learning</h3>
+          <p><strong>English:</strong> Apply all concepts together in practical projects that simulate real-world scenarios.</p>
+          <p><strong>বাংলা:</strong> সব concept একসাথে apply করে real-world scenario অনুসরণ করে practical project তৈরি করুন।</p>
+        </div>
+
+        <h3>📱 Project 1: Advanced Weather Dashboard</h3>
+        <pre><code class="language-js">// Weather Dashboard with all concepts combined
+class WeatherDashboard {
+  constructor(apiKey) {
+    this.apiKey = apiKey;
+    this.cache = new Map();
+    this.subscribers = [];
+    
+    // Setup error handling
+    this.setupErrorHandling();
+  }
+  
+  // Closure for private cache management
+  createCacheManager() {
+    const cache = new Map();
+    const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+    
+    return {
+      get(key) {
+        const item = cache.get(key);
+        if (item && Date.now() - item.timestamp < CACHE_DURATION) {
+          return item.data;
+        }
+        cache.delete(key);
+        return null;
+      },
+      
+      set(key, data) {
+        cache.set(key, { data, timestamp: Date.now() });
+      },
+      
+      clear() {
+        cache.clear();
+      }
+    };
+  }
+  
+  // Promise-based API with retry logic
+  async fetchWeatherData(city, retries = 3) {
+    const cacheKey = \`weather-\${city.toLowerCase()}\`;
+    
+    // Check cache first
+    const cached = this.cacheManager.get(cacheKey);
+    if (cached) {
+      console.log('📦 Returning cached data for', city);
+      return cached;
+    }
+    
+    let lastError;
+    
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        console.log(\`🌐 Fetching weather for \${city} (attempt \${attempt})\`);
+        
+        const response = await fetch(
+          \`https://api.openweathermap.org/data/2.5/weather?q=\${city}&appid=\${this.apiKey}&units=metric\`
+        );
+        
+        if (!response.ok) {
+          throw new Error(\`Weather API error: \${response.status}\`);
+        }
+        
+        const data = await response.json();
+        
+        // Cache the result
+        this.cacheManager.set(cacheKey, data);
+        
+        // Notify subscribers
+        this.notifySubscribers('weather-updated', { city, data });
+        
+        return data;
+        
+      } catch (error) {
+        lastError = error;
+        console.error(\`Attempt \${attempt} failed:\`, error.message);
+        
+        if (attempt < retries) {
+          await this.delay(1000 * attempt); // Exponential backoff
+        }
+      }
+    }
+    
+    throw new Error(\`Failed to fetch weather after \${retries} attempts: \${lastError.message}\`);
+  }
+  
+  // Observer pattern using closures
+  subscribe(event, callback) {
+    this.subscribers.push({ event, callback });
+    
+    // Return unsubscribe function (closure)
+    return () => {
+      const index = this.subscribers.findIndex(sub => 
+        sub.event === event && sub.callback === callback
+      );
+      if (index !== -1) {
+        this.subscribers.splice(index, 1);
+      }
+    };
+  }
+  
+  notifySubscribers(event, data) {
+    this.subscribers
+      .filter(sub => sub.event === event)
+      .forEach(sub => {
+        try {
+          sub.callback(data);
+        } catch (error) {
+          console.error('Subscriber callback error:', error);
+        }
+      });
+  }
+  
+  // Error handling setup
+  setupErrorHandling() {
+    this.cacheManager = this.createCacheManager();
+    
+    // Global error handler for this instance
+    this.handleError = (error, context) => {
+      console.error(\`WeatherDashboard Error [\${context}]:\`, error);
+      this.notifySubscribers('error', { error, context });
+    };
+  }
+  
+  delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+}
+</code></pre>
+      </div>
+
+      <!-- Study Plan -->
+      <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+        <h2 style="color: white;">📅 7-Day Mastery Plan</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+          <div>
+            <h4>Days 1-2: Promises Foundation</h4>
+            <ul style="color: rgba(255,255,255,0.9);">
+              <li>Promise creation and states</li>
+              <li>Promise.all, race, allSettled</li>
+              <li>Chaining and error handling</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Days 3-4: Async/Await Mastery</h4>
+            <ul style="color: rgba(255,255,255,0.9);">
+              <li>Sequential vs parallel execution</li>
+              <li>Error handling patterns</li>
+              <li>Performance optimization</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Day 5: Closures Deep Dive</h4>
+            <ul style="color: rgba(255,255,255,0.9);">
+              <li>Lexical scope understanding</li>
+              <li>Module patterns</li>
+              <li>Common pitfalls and solutions</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Days 6-7: Integration Projects</h4>
+            <ul style="color: rgba(255,255,255,0.9);">
+              <li>Weather Dashboard project</li>
+              <li>Task Queue system</li>
+              <li>Interview preparation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interview Preparation -->
+      <div style="background: #fff8e1; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ff9800; margin: 1rem 0;">
+        <h3>🎯 Interview Preparation Checklist</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <h4>Technical Questions</h4>
+            <ul>
+              <li>✅ Explain Promise states and lifecycle</li>
+              <li>✅ Compare callback vs Promise vs async/await</li>
+              <li>✅ Demonstrate closure with examples</li>
+              <li>✅ Handle errors in async operations</li>
+              <li>✅ Optimize parallel vs sequential execution</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Coding Challenges</h4>
+            <ul>
+              <li>✅ Implement Promise.all from scratch</li>
+              <li>✅ Create retry mechanism with exponential backoff</li>
+              <li>✅ Build module pattern with closures</li>
+              <li>✅ Fix common closure pitfalls</li>
+              <li>✅ Design error handling strategy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    `,
+    image: 'https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?w=400&h=300&fit=crop&crop=center'
   },
   {
     id: 'technical-blog-react',
