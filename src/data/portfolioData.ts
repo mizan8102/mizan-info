@@ -336,6 +336,128 @@ export const portfolioPages: BookPage[] = [
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center'
   },
   {
+    id: 'blog-js-es6-refresher',
+    title: 'Blog: JS ES6+ Refresher (EN + বাংলা)',
+    content: `
+      <h1>JavaScript (ES6+) Refresher: Q&A + Examples</h1>
+      <p><strong>Goal:</strong> দ্রুত ইন্টারভিউ রিভিশন (English + বাংলা ব্যাখ্যা + উদাহরণ)</p>
+
+      <hr />
+      <h2>1) Promises</h2>
+      <p><strong>Q:</strong> What is a Promise?</p>
+      <p><em>EN:</em> Promise represents eventual completion (resolve) or failure (reject) of async work.<br/>
+      <em>BN:</em> Promise হলো asynchronous কাজ সফল/ব্যর্থ হওয়ার ফলাফলকে ধরে রাখে।</p>
+      <pre><code class="language-js">const task = new Promise((resolve, reject) => {
+  const ok = true;
+  ok ? resolve('Task done!') : reject('Task failed!');
+});
+task.then(console.log).catch(console.error);
+// Output: Task done!
+      </code></pre>
+
+      <p><strong>States:</strong> pending → fulfilled | rejected</p>
+      <p><strong>then/catch vs async/await:</strong> chaining vs synchronous-looking flow</p>
+      <pre><code class="language-js">// then/catch
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then(r => r.json())
+  .then(d => console.log('then:', d));
+
+// async/await
+async function getTodo(){
+  const r = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const d = await r.json();
+  console.log('await:', d);
+}
+getTodo();
+      </code></pre>
+
+      <p><strong>Multiple:</strong> <code>Promise.all([p1,p2])</code> waits for all.</p>
+
+      <hr />
+      <h2>2) async/await</h2>
+      <p><em>EN:</em> Sugar over Promises for cleaner async code.<br/>
+      <em>BN:</em> Promise সহজভাবে লেখার জন্য async/await।</p>
+      <pre><code class="language-js">async function sayHello(){
+  return 'Hello!';
+}
+sayHello().then(console.log);
+      </code></pre>
+      <p><strong>Note:</strong> <code>await</code> only inside <code>async</code> functions; use <code>Promise.all</code> for parallel.</p>
+      <pre><code class="language-js">async function parallel(){
+  const [a,b] = await Promise.all([Promise.resolve(1), Promise.resolve(2)]);
+  console.log(a,b); // 1 2
+}
+parallel();
+      </code></pre>
+
+      <hr />
+      <h2>3) Closures</h2>
+      <p><em>EN:</em> Function remembers outer variables even after outer returns.<br/>
+      <em>BN:</em> ফাংশন বাইরের ভেরিয়েবল মনে রাখে।</p>
+      <pre><code class="language-js">function counter(){
+  let count = 0;
+  return function(){
+    count++;
+    return count;
+  };
+}
+const inc = counter();
+console.log(inc()); // 1
+console.log(inc()); // 2
+      </code></pre>
+
+      <hr />
+      <h2>4) Error Handling</h2>
+      <p><em>EN:</em> Use try/catch with async/await; <code>.catch</code> for Promises.<br/>
+      <em>BN:</em> async/await এ try/catch; Promise এ <code>.catch</code>।</p>
+      <pre><code class="language-js">async function risky(){
+  try{
+    await Promise.reject(new Error('Boom'));
+  }catch(e){
+    console.log('Caught:', e.message);
+  }finally{
+    console.log('Always runs');
+  }
+}
+risky();
+      </code></pre>
+
+      <hr />
+      <h2>Mini Projects</h2>
+      <h3>1) Fake Weather (Promise + async/await)</h3>
+      <pre><code class="language-js">async function getWeather(){
+  const r = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  return r.json();
+}
+getWeather().then(d => console.log('then:', d));
+(async()=>{ console.log('await:', await getWeather()); })();
+      </code></pre>
+
+      <h3>2) Stopwatch (Closure)</h3>
+      <pre><code class="language-js">function createStopwatch(){
+  let t = 0, id = null;
+  return {
+    start(){ if(id==null) id = setInterval(()=>t++,1000); },
+    pause(){ if(id!=null) { clearInterval(id); id=null; } },
+    reset(){ t = 0; },
+    read(){ return t; }
+  };
+}
+const sw = createStopwatch();
+      </code></pre>
+
+      <h3>3) Safe JSON Parser (Error Handling)</h3>
+      <pre><code class="language-js">function safeParse(str){
+  try{ return JSON.parse(str); }
+  catch{ return 'Invalid JSON'; }
+}
+      </code></pre>
+
+      <p style="margin-top:1rem"><strong>Practice Plan:</strong> Day 1 Promises → Day 2 async/await → Day 3 Closures → Day 4 Errors → Day 5–7 Combine.</p>
+    `,
+    image: 'https://images.unsplash.com/photo-1529078155058-5d716f45d604?w=400&h=300&fit=crop&crop=center'
+  },
+  {
     id: 'communities',
     title: 'Community Involvement',
     content: `
