@@ -1,0 +1,78 @@
+You are an expert React + TypeScript UI builder.  
+Create a new React TypeScript project with Tailwind CSS and set up shadcn/ui.  
+Then, inside this project, implement a polished, production-ready component called `OldBookReader`.
+
+Requirements:
+
+1. Project setup:
+   - Use React with TypeScript.
+   - Install and configure Tailwind CSS.
+   - Add shadcn/ui for UI components (Button, Card, etc.).
+   - Add framer-motion for animations.
+   - Ensure everything compiles with strict TS.
+
+2. Component: OldBookReader
+   - Accepts `pages: Array<{ id:string, title?:string, content: string, image?: string }>` as prop.
+   - `content` is **HTML string** (from editor or CMS). Render it as real HTML using `dangerouslySetInnerHTML`. Make it styled to blend with the old book theme.
+   - Sanitize content or mark where sanitization should be added.
+   - Support text, headings, images, code blocks, inline HTML.
+
+3. Visual design:
+   - Look like an antique book with parchment texture background.
+   - Rounded, slightly burnt edges. Subtle shadow at spine/gutter.
+   - Serif font for body text, elegant readable typography.
+   - Page numbers at footer, optional chapter title in header.
+   - Soft vignette and shadows for realism.
+
+4. Layout:
+   - On wide screens show **two-page spread** (left + right).
+   - On small screens show single page view.
+   - Handle long content gracefully with scroll, spacing, or split.
+
+5. Navigation & interactions:
+   - Click/tap right side = next page, left side = previous page.
+   - Show next/prev buttons using shadcn Button that fade in/out on hover.
+   - Keyboard support (← →).
+   - Touch swipe gestures.
+   - Page-turn animation with Framer Motion: curling/flip with shadows. Prop `animationType` = "flip" | "fade".
+   - Add a small scrubber/progress bar to jump between pages.
+
+6. Accessibility:
+   - Use proper ARIA roles (role="region", aria-label="Old book reader").
+   - aria-live for page change announcements.
+   - Focusable buttons, visible focus rings.
+   - Support prefers-reduced-motion (disable heavy animations).
+
+7. Theming & customization:
+   - Expose props / CSS vars: paperColor, textureOpacity, fontSizes, cornerRadius, spineWidth, animationType.
+   - Allow toggling shadows, vignette, header/footer, page numbers.
+   - Provide `startPage` prop and `onPageChange(pageIndex)` callback.
+
+8. Performance:
+   - Lazy-load images.
+   - Virtualize pages (render only visible + buffer).
+   - Keep DOM minimal.
+
+9. Developer ergonomics:
+   - Organize code in:
+     - `components/OldBookReader.tsx`
+     - `hooks/useBookPagination.ts`
+     - `styles/book-theme.css` (CSS vars/textures).
+   - Include 6 sample pages (mix of HTML text + one image) for demo preview.
+   - Comment key sections (animation, props, accessibility).
+   - README with props, usage example, theming variables.
+
+10. Deliverables:
+   - Full React + TypeScript project scaffold.
+   - shadcn/ui setup included.
+   - OldBookReader component implemented.
+   - README.md with usage.
+
+Tone:
+- Elegant, tactile, whimsical like an antique journal.
+- Prioritize UX over gimmicks.
+
+Output format:
+- Provide the project structure, key files with code (tsx, hooks, css).
+- Include README with props and sample usage.
+- Do NOT output unrelated examples.

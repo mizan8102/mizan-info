@@ -1,0 +1,53 @@
+/* App-specific styles */
+.App {
+  text-align: center;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1a876;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a68b5b;
+}
+
+/* Focus styles for better accessibility */
+*:focus {
+  outline: 2px solid #d97706;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for interactive elements */
+button, input, select {
+  transition: all 0.2s ease;
+}
+
+/* Print styles */
+@media print {
+  .bg-gradient-to-br,
+  .bg-white\/80,
+  .bg-amber-50,
+  .bg-white {
+    background: white !important;
+  }
+  
+  .shadow-lg,
+  .shadow-2xl {
+    box-shadow: none !important;
+  }
+  
+  .backdrop-blur-sm {
+    backdrop-filter: none !important;
+  }
+}
