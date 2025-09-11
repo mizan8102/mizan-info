@@ -372,6 +372,27 @@ getTodo();
       </code></pre>
 
       <p><strong>Multiple:</strong> <code>Promise.all([p1,p2])</code> waits for all.</p>
+      <p><strong>Also know:</strong> <code>Promise.race</code> (first settles), <code>Promise.allSettled</code> (all results), <code>Promise.any</code> (first fulfilled).</p>
+      <pre><code class="language-js">// race
+Promise.race([
+  fetch('/slow'),
+  fetch('/fast')
+]).then(winner => console.log('first:', winner.url));
+
+// allSettled
+const results = await Promise.allSettled([
+  Promise.resolve(1),
+  Promise.reject('x')
+]);
+console.log(results);
+
+// any
+const val = await Promise.any([
+  Promise.reject('a'),
+  Promise.resolve('b')
+]);
+console.log(val); // 'b'
+      </code></pre>
 
       <hr />
       <h2>2) async/await</h2>

@@ -38,6 +38,15 @@ function PortfolioApp() {
     return portfolioPages.length;
   };
 
+  // Build sections list for header picker
+  const sections = portfolioPages.map((p, index) => ({ title: p.title || `Page ${index + 1}`, index }));
+
+  // Identify blog pages for slider
+  const blogPages = portfolioPages
+    .map((p, index) => ({ ...p, index }))
+    .filter((p) => p.id.startsWith('blog'));
+  const isOnBlog = portfolioPages[currentPage]?.id.startsWith('blog');
+
   return (
     <div className="app-background">
       {/* Header */}
@@ -49,6 +58,8 @@ function PortfolioApp() {
         currentPage={currentPage}
         totalPages={portfolioPages.length}
         currentTitle={portfolioPages[currentPage]?.title || 'Portfolio'}
+        sections={sections}
+        onJumpToPage={handlePageChange}
       />
 
       <div className="p-4 mx-auto max-w-7xl">
@@ -88,6 +99,31 @@ function PortfolioApp() {
             ))}
           </div>
         </div>
+
+        {/* Blog slider when on Blog section */}
+        {isOnBlog && blogPages.length > 0 && (
+          <div className="p-4 mb-8 rounded-lg shadow-lg backdrop-blur-sm app-card">
+            <h3 className="mb-3 text-lg font-semibold app-text-primary" style={{ fontFamily: 'var(--book-font-script)' }}>
+              Blog Posts
+            </h3>
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {blogPages.map((bp) => (
+                <button
+                  key={bp.id}
+                  onClick={() => handlePageChange(bp.index)}
+                  className={`min-w-[240px] text-left p-4 rounded-lg border transition-all duration-200 ${
+                    currentPage === bp.index
+                      ? 'bg-amber-600 text-white border-amber-700 shadow-md'
+                      : 'bg-amber-50 dark:bg-gray-700/40 border-amber-200 dark:border-gray-600 text-amber-900 dark:text-gray-100 hover:bg-amber-100 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <div className="text-sm font-semibold truncate">{bp.title}</div>
+                  <div className="mt-1 text-xs opacity-80 truncate">Go to page {bp.index + 1}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Book Reader */}
         <div className="p-8 rounded-xl shadow-2xl app-card">
