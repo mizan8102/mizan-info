@@ -47,107 +47,104 @@ export function Header({
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              {/* 3D Globe Logo */}
-              <div className="relative group">
-                <div 
-                  className="w-12 h-12 rounded-full shadow-lg transform transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-0.5 overflow-hidden"
-                  style={{
-                    backgroundColor: '#264653',
-                    boxShadow: '0 8px 25px rgba(38, 70, 83, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                  }}
-                >
-                  {/* Rotating Globe Pattern */}
-                  <div 
-                    className="absolute inset-0 opacity-30 animate-spin"
-                    style={{
-                      animation: 'spin 20s linear infinite',
-                      backgroundImage: `
-                        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.4) 1px, transparent 2px),
-                        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.3) 1.5px, transparent 2px),
-                        radial-gradient(circle at 20% 60%, rgba(255,255,255,0.2) 1px, transparent 2px),
-                        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.3) 1px, transparent 2px),
-                        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.2) 1.5px, transparent 2px),
-                        repeating-conic-gradient(
-                          from 0deg at 50% 50%,
-                          transparent 0deg,
-                          rgba(255,255,255,0.1) 15deg,
-                          transparent 30deg,
-                          rgba(255,255,255,0.05) 45deg,
-                          transparent 60deg
-                        )
-                      `,
-                      backgroundSize: '12px 12px, 8px 8px, 10px 10px, 6px 6px, 14px 14px, 100% 100%'
-                    }}
-                  ></div>
+               {/* 3D Globe Logo */}
+               <div className="relative group">
+                 <div 
+                   className="w-12 h-12 rounded-full shadow-lg transform transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-0.5 overflow-hidden border-2"
+                   style={{
+                     backgroundColor: 'transparent',
+                     borderColor: '#264653',
+                     boxShadow: '0 8px 25px rgba(38, 70, 83, 0.2), inset 0 0 20px rgba(38, 70, 83, 0.1)',
+                   }}
+                 >
+                   {/* Rotating Globe Wireframe */}
+                   <div 
+                     className="absolute inset-0 opacity-60"
+                     style={{
+                       animation: 'spin 20s linear infinite',
+                       backgroundImage: `
+                         radial-gradient(circle at 30% 20%, #264653 0.5px, transparent 1px),
+                         radial-gradient(circle at 70% 30%, #264653 0.5px, transparent 1px),
+                         radial-gradient(circle at 20% 60%, #264653 0.5px, transparent 1px),
+                         radial-gradient(circle at 80% 70%, #264653 0.5px, transparent 1px),
+                         radial-gradient(circle at 50% 80%, #264653 0.5px, transparent 1px)
+                       `,
+                       backgroundSize: '12px 12px, 8px 8px, 10px 10px, 6px 6px, 14px 14px'
+                     }}
+                   ></div>
 
-                  {/* Latitude Lines */}
-                  <div 
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      backgroundImage: `
-                        repeating-linear-gradient(
-                          0deg,
-                          transparent 0px,
-                          rgba(255,255,255,0.3) 1px,
-                          transparent 2px,
-                          transparent 8px
-                        )
-                      `
-                    }}
-                  ></div>
+                   {/* Latitude Lines (Horizontal) */}
+                   <div 
+                     className="absolute inset-0 opacity-40"
+                     style={{
+                       backgroundImage: `
+                         repeating-linear-gradient(
+                           0deg,
+                           transparent 0px,
+                           transparent 6px,
+                           #264653 7px,
+                           #264653 8px,
+                           transparent 9px,
+                           transparent 15px
+                         )
+                       `
+                     }}
+                   ></div>
 
-                  {/* Longitude Lines - Rotating */}
-                  <div 
-                    className="absolute inset-0 opacity-15"
-                    style={{
-                      animation: 'spin 15s linear infinite reverse',
-                      backgroundImage: `
-                        repeating-conic-gradient(
-                          from 0deg at 50% 50%,
-                          transparent 0deg,
-                          rgba(255,255,255,0.4) 1deg,
-                          transparent 2deg,
-                          transparent 30deg
-                        )
-                      `
-                    }}
-                  ></div>
-                  
-                  {/* Globe Shine Effect */}
-                  <div 
-                    className="absolute inset-0 rounded-full"
-                    style={{
-                      background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 40%, transparent 70%)'
-                    }}
-                  ></div>
+                   {/* Longitude Lines - Rotating (Vertical) */}
+                   <div 
+                     className="absolute inset-0 opacity-30"
+                     style={{
+                       animation: 'spin 15s linear infinite reverse',
+                       backgroundImage: `
+                         repeating-conic-gradient(
+                           from 0deg at 50% 50%,
+                           transparent 0deg,
+                           transparent 28deg,
+                           #264653 29deg,
+                           #264653 31deg,
+                           transparent 32deg,
+                           transparent 60deg
+                         )
+                       `
+                     }}
+                   ></div>
 
-                  {/* Rotating Highlight */}
-                  <div 
-                    className="absolute inset-0 rounded-full opacity-40"
-                    style={{
-                      animation: 'spin 8s linear infinite',
-                      background: 'conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.3) 10%, transparent 20%, transparent 100%)'
-                    }}
-                  ></div>
-                  
-                  <div className="flex relative z-10 justify-center items-center h-full">
-                    <span 
-                      className="text-lg font-black tracking-wider text-white drop-shadow-sm"
-                      style={{ 
-                        fontFamily: 'Inter, system-ui, sans-serif',
-                        textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)'
-                      }}
-                    >
-                      MZ
-                    </span>
-                  </div>
-                </div>
-                {/* 3D Base Shadow */}
-                <div 
-                  className="absolute -bottom-1 left-1/2 w-10 h-2 rounded-full opacity-30 blur-sm transition-all duration-300 transform -translate-x-1/2 group-hover:opacity-50"
-                  style={{ backgroundColor: '#264653' }}
-                ></div>
-              </div>
+                   {/* Equator Line */}
+                   <div 
+                     className="absolute top-1/2 left-0 right-0 h-0.5 transform -translate-y-1/2 opacity-50"
+                     style={{ backgroundColor: '#264653' }}
+                   ></div>
+
+                   {/* Prime Meridian */}
+                   <div 
+                     className="absolute top-0 bottom-0 left-1/2 w-0.5 transform -translate-x-1/2 opacity-40"
+                     style={{
+                       backgroundColor: '#264653',
+                       animation: 'spin 12s linear infinite',
+                       transformOrigin: 'center'
+                     }}
+                   ></div>
+                   
+                   <div className="flex relative z-10 justify-center items-center h-full">
+                     <span 
+                       className="text-lg font-black tracking-wider drop-shadow-sm"
+                       style={{ 
+                         fontFamily: 'Inter, system-ui, sans-serif',
+                         color: '#264653',
+                         textShadow: '0 1px 2px rgba(38, 70, 83, 0.2)'
+                       }}
+                     >
+                       MZ
+                     </span>
+                   </div>
+                 </div>
+                 {/* 3D Base Shadow */}
+                 <div 
+                   className="absolute -bottom-1 left-1/2 w-10 h-2 rounded-full opacity-20 blur-sm transition-all duration-300 transform -translate-x-1/2 group-hover:opacity-40"
+                   style={{ backgroundColor: '#264653' }}
+                 ></div>
+               </div>
               
               {/* Professional Text */}
               <div className="hidden sm:block">
@@ -174,7 +171,7 @@ export function Header({
                     className="text-xs font-medium transition-colors duration-300"
                     style={{ color: '#264653' }}
                   >
-                    Software Engineer Portfolio
+                    Software Engineer
                   </p>
                 </div>
               </div>

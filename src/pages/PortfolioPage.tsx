@@ -73,11 +73,11 @@ export function PortfolioPage() {
       {/* Projects Grid */}
       <div className="space-y-6">
         <h2 className="text-xl font-semibold">Projects</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {filteredProjects.map((project) => (
             <Card key={project.id} className="h-full">
               <CardHeader>
-                <div className="flex items-start justify-between">
+                <div className="flex justify-between items-start">
                   <div className="space-y-2">
                     <CardTitle className="text-lg">{project.title}</CardTitle>
                     <div className="flex gap-2">
@@ -111,7 +111,7 @@ export function PortfolioPage() {
                 </p>
                 
                 <div>
-                  <h4 className="font-semibold text-sm mb-2">Technologies Used</h4>
+                  <h4 className="mb-2 text-sm font-semibold">Technologies Used</h4>
                   <div className="flex flex-wrap gap-1">
                     {project.technologies.map((tech) => (
                       <Badge key={tech} variant="secondary" className="text-xs">
@@ -122,11 +122,11 @@ export function PortfolioPage() {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-sm mb-2">Key Features</h4>
-                  <ul className="text-xs text-muted-foreground space-y-1">
+                  <h4 className="mb-2 text-sm font-semibold">Key Features</h4>
+                  <ul className="space-y-1 text-xs text-muted-foreground">
                     {project.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
+                      <li key={index} className="flex gap-2 items-start">
+                        <span className="mt-1 text-primary">•</span>
                         {feature}
                       </li>
                     ))}
@@ -145,21 +145,21 @@ export function PortfolioPage() {
           {workExperience.map((job) => (
             <Card key={job.id}>
               <CardHeader>
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                   <div>
                     <CardTitle className="text-lg">{job.position}</CardTitle>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground mt-1">
-                      <div className="flex items-center gap-1">
+                    <div className="flex gap-4 items-center mt-1 text-sm text-muted-foreground">
+                      <div className="flex gap-1 items-center">
                         <Building className="w-4 h-4" />
                         {job.company}
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex gap-1 items-center">
                         <MapPin className="w-4 h-4" />
                         {job.location}
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                  <div className="flex gap-1 items-center text-sm text-muted-foreground">
                     <Calendar className="w-4 h-4" />
                     {job.duration}
                   </div>
@@ -167,11 +167,11 @@ export function PortfolioPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-semibold text-sm mb-2">Key Responsibilities</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
+                  <h4 className="mb-2 text-sm font-semibold">Key Responsibilities</h4>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
                     {job.responsibilities.map((responsibility, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
+                      <li key={index} className="flex gap-2 items-start">
+                        <span className="mt-1 text-primary">•</span>
                         {responsibility}
                       </li>
                     ))}
@@ -179,7 +179,7 @@ export function PortfolioPage() {
                 </div>
                 
                 <div>
-                  <h4 className="font-semibold text-sm mb-2">Technologies</h4>
+                  <h4 className="mb-2 text-sm font-semibold">Technologies</h4>
                   <div className="flex flex-wrap gap-1">
                     {job.technologies.map((tech) => (
                       <Badge key={tech} variant="secondary" className="text-xs">

@@ -158,20 +158,49 @@ export function SkillsPage() {
               <CardTitle className="text-lg">Certifications</CardTitle>
             </div>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">AWS Developer</span>
-              <Badge variant="outline">In Progress</Badge>
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium">HackerRank Java (Basic)</span>
+                <Badge variant="default">Verified</Badge>
+              </div>
+              <div className="p-4 text-center rounded-md border bg-muted/50">
+                <Award className="mx-auto mb-2 w-12 h-12 text-primary" />
+                <p className="mb-1 text-sm font-medium">Java (Basic) Certificate</p>
+                <p className="mb-3 text-xs text-muted-foreground">
+                  Covers basic topics in Java language such as classes, data structures, inheritance, exception handling, etc.
+                </p>
+                <a 
+                  href="https://www.hackerrank.com/certificates/e32d87cc6650"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-3 py-1 text-xs font-medium text-white rounded-md transition-colors bg-primary hover:bg-primary/90"
+                >
+                  View Certificate
+                </a>
+              </div>
             </div>
             <Separator />
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Laravel Certified</span>
-              <Badge variant="default">Certified</Badge>
-            </div>
-            <Separator />
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Vue.js Expert</span>
-              <Badge variant="default">Certified</Badge>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium">HackerRank SQL (Basic)</span>
+                <Badge variant="default">Verified</Badge>
+              </div>
+              <div className="p-4 text-center rounded-md border bg-muted/50">
+                <Award className="mx-auto mb-2 w-12 h-12 text-primary" />
+                <p className="mb-1 text-sm font-medium">SQL (Basic) Certificate</p>
+                <p className="mb-3 text-xs text-muted-foreground">
+                  Includes simple queries, relationships, and aggregators.
+                </p>
+                <a 
+                  href="https://www.hackerrank.com/certificates/2330d1e151f9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-3 py-1 text-xs font-medium text-white rounded-md transition-colors bg-primary hover:bg-primary/90"
+                >
+                  View Certificate
+                </a>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -225,7 +254,7 @@ export function SkillsPage() {
               <p className="text-sm text-muted-foreground">Major Projects</p>
             </div>
             <div className="space-y-2 text-center">
-              <div className="text-2xl font-bold text-primary">3</div>
+              <div className="text-2xl font-bold text-primary">2</div>
               <p className="text-sm text-muted-foreground">Certifications</p>
             </div>
           </div>

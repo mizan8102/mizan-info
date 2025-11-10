@@ -11,6 +11,72 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'blackorigin-scalable-marketplace-trading-bot',
+    title: 'How We Built BlackOrigin: A Scalable Marketplace Trading Bot',
+    excerpt: 'A deep dive into building BlackOrigin, a high-performance trading bot that handles millions of transactions with sub-second execution using modern architecture and technologies.',
+    date: '2024-11-10',
+    category: 'FinTech',
+    tags: ['Trading Bot', 'Scalability', 'FinTech', 'Architecture', 'Performance'],
+    readTime: '10 min read',
+    content: `
+      <h1>How We Built BlackOrigin: A Scalable Marketplace Trading Bot</h1>
+      
+      <p>Building a high-performance trading bot that can handle millions of transactions requires careful architecture, robust technology choices, and meticulous attention to performance optimization. In this article, I'll share our journey building BlackOrigin, a scalable marketplace trading bot.</p>
+      
+      <p><strong>Read the full article on Medium:</strong> <a style="text-decoration: underline; color:blue" href="https://medium.com/@mizan.developer2001/how-we-built-blackorigin-a-scalable-marketplace-trading-bot-dd43a3149301" target="_blank" rel="noopener noreferrer">How We Built BlackOrigin: A Scalable Marketplace Trading Bot</a></p>
+      
+      <h2>Key Highlights</h2>
+      <ul>
+        <li><strong>Sub-second execution:</strong> Achieved ultra-low latency trading with optimized algorithms</li>
+        <li><strong>Millions of transactions:</strong> Built to handle massive scale with robust architecture</li>
+        <li><strong>Modern tech stack:</strong> Leveraged cutting-edge technologies for performance and reliability</li>
+        <li><strong>Scalable design:</strong> Architecture that grows with demand</li>
+      </ul>
+      
+      <h2>Technical Architecture</h2>
+      <p>The BlackOrigin trading bot was built with scalability and performance as core principles. Our architecture includes:</p>
+      
+      <h3>Core Technologies</h3>
+      <ul>
+        <li><strong>Message Queuing:</strong> RabbitMQ for reliable message processing</li>
+        <li><strong>Caching Layer:</strong> Redis for ultra-fast data access</li>
+        <li><strong>Real-time Processing:</strong> Event-driven architecture for instant trade execution</li>
+        <li><strong>Monitoring:</strong> Comprehensive system monitoring and alerting</li>
+      </ul>
+      
+      <h2>Performance Optimizations</h2>
+      <p>Achieving sub-second execution required several key optimizations:</p>
+      
+      <h3>1. Low-Latency Design</h3>
+      <p>Every millisecond counts in trading. We optimized our system for minimal latency through:</p>
+      <ul>
+        <li>Efficient data structures and algorithms</li>
+        <li>Connection pooling and persistent connections</li>
+        <li>Strategic caching of frequently accessed data</li>
+      </ul>
+      
+      <h3>2. Scalable Message Processing</h3>
+      <p>Using RabbitMQ, we built a robust message processing system that can handle massive throughput while maintaining reliability.</p>
+      
+      <h3>3. Real-time Data Management</h3>
+      <p>Redis serves as our high-speed data layer, enabling instant access to market data and trading signals.</p>
+      
+      <h2>Lessons Learned</h2>
+      <p>Building BlackOrigin taught us valuable lessons about:</p>
+      <ul>
+        <li>The importance of thorough testing in high-frequency trading systems</li>
+        <li>Balancing performance with reliability and safety</li>
+        <li>The critical role of monitoring and observability</li>
+        <li>Designing for failure and implementing proper error handling</li>
+      </ul>
+      
+      <h2>Conclusion</h2>
+      <p>BlackOrigin represents a significant achievement in building scalable, high-performance trading systems. The combination of modern technologies, careful architecture, and performance optimization resulted in a bot capable of handling millions of transactions with sub-second execution.</p>
+      
+      <p>For the complete technical details and implementation insights, <a style="text-decoration: underline; color:blue" href="https://medium.com/@mizan.developer2001/how-we-built-blackorigin-a-scalable-marketplace-trading-bot-dd43a3149301" target="_blank" rel="noopener noreferrer">read the full article on Medium</a>.</p>
+    `
+  },
+  {
     id: 'modern-javascript-es6-features',
     title: 'Modern JavaScript ES6+ Features Every Developer Should Know',
     excerpt: 'A comprehensive guide to essential ES6+ features that will make you a more effective JavaScript developer.',
