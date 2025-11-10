@@ -1,12 +1,12 @@
 import React from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
-import PortfolioApp from './PortfolioApp';
+import { AppRouter } from './router/AppRouter';
 import './App.css';
 
 function App() {
   return (
     <ThemeProvider>
-      <PortfolioApp />
+      <AppRouter />
     </ThemeProvider>
   );
 }

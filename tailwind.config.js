@@ -83,8 +83,9 @@ module.exports = {
         "page-fade": "page-fade 0.4s ease-in-out",
       },
       fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         serif: ['Georgia', 'Times New Roman', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'monospace'],
       },
     },
   },

@@ -1,145 +1,201 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Sun, 
   Moon, 
-  User,
-  Briefcase,
-  Code,
-  GraduationCap,
-  Award,
-  BookOpen,
-  Users,
-  Settings, 
-  HelpCircle, 
   Menu,
-  X
+  Settings, 
+  HelpCircle
 } from 'lucide-react';
 import { Button } from './ui/button';
+import { Badge } from './ui/badge';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface HeaderProps {
+  onMenuClick: () => void;
   onSettingsClick: () => void;
   onHelpClick: () => void;
-  currentPage: number;
-  totalPages: number;
-  currentTitle: string;
-  sections?: { title: string; index: number }[];
-  onJumpToPage?: (index: number) => void;
+  currentPageTitle: string;
 }
 
 export function Header({
+  onMenuClick,
   onSettingsClick,
   onHelpClick,
-  currentPage,
-  totalPages,
-  currentTitle,
-  sections,
-  onJumpToPage
+  currentPageTitle
 }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // Portfolio category navigation
-  const portfolioCategories = [
-    { id: 'personal', label: 'About', icon: User, description: 'Personal profile & philosophy' },
-    { id: 'professional', label: 'Experience', icon: Briefcase, description: 'Work experience & projects' },
-    { id: 'technical', label: 'Skills', icon: Code, description: 'Technical expertise' },
-    { id: 'academic', label: 'Education', icon: GraduationCap, description: 'Academic background' },
-    { id: 'achievements', label: 'Awards', icon: Award, description: 'Achievements & recognition' },
-    { id: 'content', label: 'Blog', icon: BookOpen, description: 'Blog posts & writing' },
-    { id: 'community', label: 'Community', icon: Users, description: 'Community involvement' },
-  ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 shadow-sm backdrop-blur-sm transition-colors duration-300 bg-white/95 dark:bg-gray-900/95 dark:border-gray-700">
+    <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo and Title */}
+          {/* Menu Button & Logo */}
           <div className="flex items-center space-x-4">
+            <Button
+              onClick={onMenuClick}
+              variant="ghost"
+              size="icon"
+              className="lg:hidden"
+              aria-label="Toggle menu"
+            >
+              <Menu className="w-5 h-5" />
+            </Button>
+            
             <motion.div
-              className="flex items-center space-x-2"
-              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-4"
+              whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              {/* <div className="flex justify-center items-center w-9 h-9 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg shadow-sm">
-                <span className="text-sm font-black tracking-widest text-white" style={{fontFamily:'var(--book-font-headline, serif)'}}>MZ</span>
-              </div> */}
-              <div>
-                <h1 className="text-xl font-bold text-gray-900 transition-colors duration-300 dark:text-white" style={{fontFamily:'var(--History Jumper, serif)'}}>
-                  Mizan
-                </h1>
-                <p className="text-xs text-gray-500 transition-colors duration-300 dark:text-gray-400" style={{fontFamily:'var(--book-font-small, serif)'}}>
-                  Interactive Career Story & Project Showcase
-                </p>
+              {/* 3D Globe Logo */}
+              <div className="relative group">
+                <div 
+                  className="w-12 h-12 rounded-full shadow-lg transform transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-0.5 overflow-hidden"
+                  style={{
+                    backgroundColor: '#264653',
+                    boxShadow: '0 8px 25px rgba(38, 70, 83, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                  }}
+                >
+                  {/* Rotating Globe Pattern */}
+                  <div 
+                    className="absolute inset-0 opacity-30 animate-spin"
+                    style={{
+                      animation: 'spin 20s linear infinite',
+                      backgroundImage: `
+                        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.4) 1px, transparent 2px),
+                        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.3) 1.5px, transparent 2px),
+                        radial-gradient(circle at 20% 60%, rgba(255,255,255,0.2) 1px, transparent 2px),
+                        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.3) 1px, transparent 2px),
+                        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.2) 1.5px, transparent 2px),
+                        repeating-conic-gradient(
+                          from 0deg at 50% 50%,
+                          transparent 0deg,
+                          rgba(255,255,255,0.1) 15deg,
+                          transparent 30deg,
+                          rgba(255,255,255,0.05) 45deg,
+                          transparent 60deg
+                        )
+                      `,
+                      backgroundSize: '12px 12px, 8px 8px, 10px 10px, 6px 6px, 14px 14px, 100% 100%'
+                    }}
+                  ></div>
+
+                  {/* Latitude Lines */}
+                  <div 
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage: `
+                        repeating-linear-gradient(
+                          0deg,
+                          transparent 0px,
+                          rgba(255,255,255,0.3) 1px,
+                          transparent 2px,
+                          transparent 8px
+                        )
+                      `
+                    }}
+                  ></div>
+
+                  {/* Longitude Lines - Rotating */}
+                  <div 
+                    className="absolute inset-0 opacity-15"
+                    style={{
+                      animation: 'spin 15s linear infinite reverse',
+                      backgroundImage: `
+                        repeating-conic-gradient(
+                          from 0deg at 50% 50%,
+                          transparent 0deg,
+                          rgba(255,255,255,0.4) 1deg,
+                          transparent 2deg,
+                          transparent 30deg
+                        )
+                      `
+                    }}
+                  ></div>
+                  
+                  {/* Globe Shine Effect */}
+                  <div 
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 40%, transparent 70%)'
+                    }}
+                  ></div>
+
+                  {/* Rotating Highlight */}
+                  <div 
+                    className="absolute inset-0 rounded-full opacity-40"
+                    style={{
+                      animation: 'spin 8s linear infinite',
+                      background: 'conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.3) 10%, transparent 20%, transparent 100%)'
+                    }}
+                  ></div>
+                  
+                  <div className="flex relative z-10 justify-center items-center h-full">
+                    <span 
+                      className="text-lg font-black tracking-wider text-white drop-shadow-sm"
+                      style={{ 
+                        fontFamily: 'Inter, system-ui, sans-serif',
+                        textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)'
+                      }}
+                    >
+                      MZ
+                    </span>
+                  </div>
+                </div>
+                {/* 3D Base Shadow */}
+                <div 
+                  className="absolute -bottom-1 left-1/2 w-10 h-2 rounded-full opacity-30 blur-sm transition-all duration-300 transform -translate-x-1/2 group-hover:opacity-50"
+                  style={{ backgroundColor: '#264653' }}
+                ></div>
+              </div>
+              
+              {/* Professional Text */}
+              <div className="hidden sm:block">
+                <motion.h1 
+                  className="text-xl font-bold transition-all duration-300 bg-gradient-to-r from-[#264653] via-[#2a9d8f] to-[#264653] bg-clip-text text-transparent"
+                  style={{ 
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                    textShadow: '0 1px 2px rgba(38, 70, 83, 0.1)',
+                    backgroundSize: '200% 100%',
+                  }}
+                  whileHover={{ 
+                    backgroundPosition: '100% 0%',
+                    transition: { duration: 0.5 }
+                  }}
+                >
+                  Mizan Rahman
+                </motion.h1>
+                <div className="flex items-center space-x-2">
+                  <div 
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: '#2a9d8f' }}
+                  ></div>
+                  <p 
+                    className="text-xs font-medium transition-colors duration-300"
+                    style={{ color: '#264653' }}
+                  >
+                    Software Engineer Portfolio
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden items-center space-x-1 md:flex">
-            {/* Quick Category Navigation */}
-            <div className="flex items-center space-x-1">
-              {portfolioCategories.slice(0, 4).map((category) => {
-                const Icon = category.icon;
-                const relatedPages = sections?.filter(s => 
-                  s.title.toLowerCase().includes(category.label.toLowerCase()) ||
-                  (category.id === 'personal' && (s.title.includes('About') || s.title.includes('Portfolio'))) ||
-                  (category.id === 'professional' && (s.title.includes('Experience') || s.title.includes('Projects'))) ||
-                  (category.id === 'technical' && s.title.includes('Skills')) ||
-                  (category.id === 'academic' && (s.title.includes('Education') || s.title.includes('Research')))
-                ) || [];
-                
-                return (
-                  <Button
-                    key={category.id}
-                    onClick={() => relatedPages.length > 0 && onJumpToPage && onJumpToPage(relatedPages[0].index)}
-                    variant="ghost"
-                    size="sm"
-                    className="flex items-center space-x-1 px-3 py-2 rounded-lg transition-all duration-200 text-gray-700 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-gray-700"
-                    title={category.description}
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span className="font-medium text-xs">{category.label}</span>
-                  </Button>
-                );
-              })}
-            </div>
-
-            {/* Sections Picker */}
-            {sections && sections.length > 0 && onJumpToPage && (
-              <div className="ml-4">
-                <select
-                  aria-label="Jump to section"
-                  className="px-3 py-2 text-sm text-gray-700 bg-white rounded-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                  value={currentPage}
-                  onChange={(e) => onJumpToPage(Number(e.target.value))}
-                >
-                  {sections.map((s) => (
-                    <option key={s.index} value={s.index}>{s.title}</option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div>
-
-          {/* Page Info */}
-          <div className="hidden items-center space-x-4 lg:flex">
-            <div className="text-sm text-gray-600 transition-colors duration-300 dark:text-gray-300">
-              <span className="font-medium">{currentTitle}</span>
-              <span className="mx-2">•</span>
-              <span>Page {currentPage + 1} of {totalPages}</span>
-            </div>
+          {/* Current Page Title */}
+          <div className="hidden items-center md:flex">
+            <Badge variant="outline" className="text-sm">
+              {currentPageTitle}
+            </Badge>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1">
             {/* Theme Toggle */}
             <Button
               onClick={toggleTheme}
               variant="ghost"
               size="icon"
-              className="w-10 h-10 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="w-9 h-9 hover:bg-accent hover:text-accent-foreground"
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               <motion.div
@@ -149,9 +205,9 @@ export function Header({
                 transition={{ duration: 0.3 }}
               >
                 {theme === 'light' ? (
-                  <Moon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                  <Moon className="w-4 h-4" />
                 ) : (
-                  <Sun className="w-5 h-5 text-yellow-500" />
+                  <Sun className="w-4 h-4" />
                 )}
               </motion.div>
             </Button>
@@ -161,10 +217,10 @@ export function Header({
               onClick={onHelpClick}
               variant="ghost"
               size="icon"
-              className="w-10 h-10 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="w-9 h-9 hover:bg-accent hover:text-accent-foreground"
               aria-label="Open help"
             >
-              <HelpCircle className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+              <HelpCircle className="w-4 h-4" />
             </Button>
 
             {/* Settings Button */}
@@ -172,108 +228,13 @@ export function Header({
               onClick={onSettingsClick}
               variant="ghost"
               size="icon"
-              className="w-10 h-10 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="w-9 h-9 hover:bg-accent hover:text-accent-foreground"
               aria-label="Open settings"
             >
-              <Settings className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-            </Button>
-
-            {/* Mobile Menu Button */}
-            <Button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              variant="ghost"
-              size="icon"
-              className="w-10 h-10 rounded-lg md:hidden hover:bg-gray-100 dark:hover:bg-gray-800"
-              aria-label="Toggle mobile menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-              ) : (
-                <Menu className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-              )}
+              <Settings className="w-4 h-4" />
             </Button>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        <motion.div
-          className={`md:hidden overflow-hidden ${
-            isMobileMenuOpen ? 'max-h-96' : 'max-h-0'
-          }`}
-          initial={false}
-          animate={{ height: isMobileMenuOpen ? 'auto' : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="py-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
-            {/* Mobile Navigation */}
-            <div className="space-y-2">
-              {/* Mobile Category Navigation */}
-              <div className="grid grid-cols-2 gap-2">
-                {portfolioCategories.map((category) => {
-                  const Icon = category.icon;
-                  const relatedPages = sections?.filter(s => 
-                    s.title.toLowerCase().includes(category.label.toLowerCase()) ||
-                    (category.id === 'personal' && (s.title.includes('About') || s.title.includes('Portfolio'))) ||
-                    (category.id === 'professional' && (s.title.includes('Experience') || s.title.includes('Projects'))) ||
-                    (category.id === 'technical' && s.title.includes('Skills')) ||
-                    (category.id === 'academic' && (s.title.includes('Education') || s.title.includes('Research'))) ||
-                    (category.id === 'achievements' && (s.title.includes('Awards') || s.title.includes('Achievements'))) ||
-                    (category.id === 'content' && s.title.includes('Blog')) ||
-                    (category.id === 'community' && s.title.includes('Community'))
-                  ) || [];
-                  
-                  return (
-                    <Button
-                      key={category.id}
-                      onClick={() => {
-                        if (relatedPages.length > 0 && onJumpToPage) {
-                          onJumpToPage(relatedPages[0].index);
-                          setIsMobileMenuOpen(false);
-                        }
-                      }}
-                      variant="ghost"
-                      className="flex items-center space-x-2 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-gray-700"
-                    >
-                      <Icon className="w-4 h-4" />
-                      <div className="text-left">
-                        <div className="font-medium text-sm">{category.label}</div>
-                        <div className="text-xs opacity-75">{category.description}</div>
-                      </div>
-                    </Button>
-                  );
-                })}
-              </div>
-
-              {/* Mobile Sections Picker */}
-              {sections && sections.length > 0 && onJumpToPage && (
-                <div className="px-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <label className="block mb-2 text-xs font-medium text-gray-600 dark:text-gray-300">All Portfolio Sections</label>
-                  <select
-                    aria-label="Jump to section"
-                    className="px-3 py-2 w-full text-sm text-gray-700 bg-white rounded-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                    value={currentPage}
-                    onChange={(e) => {
-                      onJumpToPage(Number(e.target.value));
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    {sections.map((s) => (
-                      <option key={s.index} value={s.index}>{s.title}</option>
-                    ))}
-                  </select>
-                </div>
-              )}
-            </div>
-
-            {/* Mobile Page Info */}
-            <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-              <div className="px-4 text-sm text-gray-600 transition-colors duration-300 dark:text-gray-300">
-                <div className="font-medium">{currentTitle}</div>
-                <div>Page {currentPage + 1} of {totalPages}</div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </header>
   );

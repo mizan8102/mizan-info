@@ -46,21 +46,31 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.classList.remove('dark');
     }
     
-    // Update CSS custom properties
+    // Update CSS custom properties with new color scheme
     if (theme === 'dark') {
-      root.style.setProperty('--bg-primary', '#1a1a1a');
-      root.style.setProperty('--bg-secondary', '#2d2d2d');
-      root.style.setProperty('--text-primary', '#ffffff');
-      root.style.setProperty('--text-secondary', '#b3b3b3');
-      root.style.setProperty('--accent-color', '#f59e0b');
-      root.style.setProperty('--border-color', '#404040');
+      root.style.setProperty('--primary', '183 25% 32%'); // #264653 in HSL
+      root.style.setProperty('--primary-foreground', '0 0% 98%');
+      root.style.setProperty('--background', '0 0% 7%');
+      root.style.setProperty('--foreground', '0 0% 98%');
+      root.style.setProperty('--muted', '0 0% 15%');
+      root.style.setProperty('--muted-foreground', '0 0% 63%');
+      root.style.setProperty('--border', '0 0% 20%');
+      root.style.setProperty('--accent', '0 0% 15%');
+      root.style.setProperty('--accent-foreground', '0 0% 98%');
+      root.style.setProperty('--secondary', '0 0% 15%');
+      root.style.setProperty('--secondary-foreground', '0 0% 98%');
     } else {
-      root.style.setProperty('--bg-primary', '#ffffff');
-      root.style.setProperty('--bg-secondary', '#f8f9fa');
-      root.style.setProperty('--text-primary', '#1a1a1a');
-      root.style.setProperty('--text-secondary', '#6b7280');
-      root.style.setProperty('--accent-color', '#d97706');
-      root.style.setProperty('--border-color', '#e5e7eb');
+      root.style.setProperty('--primary', '183 25% 32%'); // #264653 in HSL
+      root.style.setProperty('--primary-foreground', '0 0% 98%');
+      root.style.setProperty('--background', '0 0% 100%');
+      root.style.setProperty('--foreground', '0 0% 9%');
+      root.style.setProperty('--muted', '0 0% 96%');
+      root.style.setProperty('--muted-foreground', '0 0% 35%');
+      root.style.setProperty('--border', '0 0% 85%');
+      root.style.setProperty('--accent', '0 0% 94%');
+      root.style.setProperty('--accent-foreground', '0 0% 15%');
+      root.style.setProperty('--secondary', '0 0% 94%');
+      root.style.setProperty('--secondary-foreground', '0 0% 15%');
     }
   }, [theme]);
 
