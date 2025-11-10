@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { ExternalLink, Github, Calendar, MapPin, Building } from 'lucide-react';
-import { projects, workExperience, Project } from '../data/portfolioData';
+import { projects, workExperience } from '../data/portfolioData';
 
 export function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');

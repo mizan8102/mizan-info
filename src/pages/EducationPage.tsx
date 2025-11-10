@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
+import { GraduationCap, Calendar, Award } from 'lucide-react';
 
 export function EducationPage() {
   // Set page title for SEO
@@ -32,16 +32,16 @@ export function EducationPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center space-x-2">
-            <GraduationCap className="h-6 w-6 text-primary" />
+            <GraduationCap className="w-6 h-6 text-primary" />
             <CardTitle className="text-xl">Educational Background</CardTitle>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-12 space-y-4">
-            <GraduationCap className="h-16 w-16 mx-auto text-muted-foreground" />
+          <div className="py-12 space-y-4 text-center">
+            <GraduationCap className="mx-auto w-16 h-16 text-muted-foreground" />
             <div className="space-y-2">
               <h3 className="text-lg font-semibold">Coming Soon</h3>
-              <p className="text-muted-foreground max-w-md mx-auto">
+              <p className="mx-auto max-w-md text-muted-foreground">
                 Detailed information about my educational background, degrees, certifications, 
                 and academic projects will be available here soon.
               </p>
@@ -58,14 +58,14 @@ export function EducationPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <Award className="h-5 w-5 text-primary" />
+              <Award className="w-5 h-5 text-primary" />
               <span>Degrees & Certifications</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="text-center py-8 text-muted-foreground">
-                <Award className="h-12 w-12 mx-auto mb-2" />
+              <div className="py-8 text-center text-muted-foreground">
+                <Award className="mx-auto mb-2 w-12 h-12" />
                 <p className="text-sm">Academic degrees and professional certifications</p>
               </div>
             </div>
@@ -75,14 +75,14 @@ export function EducationPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <Calendar className="h-5 w-5 text-primary" />
+              <Calendar className="w-5 h-5 text-primary" />
               <span>Academic Timeline</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="text-center py-8 text-muted-foreground">
-                <Calendar className="h-12 w-12 mx-auto mb-2" />
+              <div className="py-8 text-center text-muted-foreground">
+                <Calendar className="mx-auto mb-2 w-12 h-12" />
                 <p className="text-sm">Educational milestones and timeline</p>
               </div>
             </div>
