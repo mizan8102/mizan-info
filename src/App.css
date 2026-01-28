@@ -44,6 +44,51 @@
   --sidebar-text-muted: hsl(0 0% 65%);
 }
 
+/* Cyberpunk Animations */
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes neon-glow {
+  0%, 100% {
+    text-shadow: 0 0 5px #22c55e, 0 0 10px #22c55e, 0 0 15px #22c55e;
+  }
+  50% {
+    text-shadow: 0 0 10px #22c55e, 0 0 20px #22c55e, 0 0 30px #22c55e;
+  }
+}
+
+.glitch-effect {
+  animation: glitch 0.3s infinite;
+}
+
+.neon-text {
+  animation: neon-glow 2s ease-in-out infinite alternate;
+}
+
 /* Globe Animation Keyframes */
 @keyframes globe-rotate {
   0% {
@@ -210,6 +255,14 @@ button, input, select {
 .dark .prose h3,
 .dark .prose h4 {
   color: hsl(var(--foreground));
+}
+
+/* Cyberpunk Layout Responsive Styles */
+@media (min-width: 1024px) {
+  .cyberpunk-sidebar {
+    position: relative !important;
+    transform: translateX(0) !important;
+  }
 }
 
 /* Print styles */
